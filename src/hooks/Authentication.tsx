@@ -3,7 +3,7 @@ import Router from "next/router";
 import { setCookie, parseCookies } from "nookies";
 
 import { recoverUser, signRequest, SignRequestType } from "../services/auth";
-import { api } from "../api";
+import { api } from "../services/api";
 
 interface UserType {
   name: string;
