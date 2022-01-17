@@ -4,8 +4,9 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import { GetServerSideProps } from "next";
 import { AuthenticationContext } from "../hooks/Authentication";
-import { api } from "../api";
+import { api } from "../services/api";
 import { parseCookies } from "nookies";
+import { getAPIClient } from "../services/axios";
 
 const navigation = ["Dashboard", "Team", "Projects", "Calendar", "Reports"];
 const profile = ["Your Profile", "Settings"];
@@ -232,6 +233,7 @@ export default function Dashboard() {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const api = getAPIClient(ctx);
   const { ["nextauth.token"]: token } = parseCookies(ctx);
   if (!token) {
     return {
